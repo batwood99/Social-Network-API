@@ -68,3 +68,34 @@ module.exports = {
         }
     },
 
+    async createReaction(req, res) {
+        try {
+            const thoughtData = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $addToSet: { reactions: req.body } },
+                { new: true }
+            );
+
+            res.json(thoughtData);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
+    async deleteReaction(req, res) {
+        try {
+            const thoughtData = await Thought.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $pull: { reactions: { reactionId: req.body.reactionId } } },
+                { new: true }
+            );
+
+            if (!thoughtData) {
+                return res.status(404).json({ message: 'Invalid Thought ID number' });
+            }
+            res.json({ message: 'Reaction deleted successfully', thoughtData });
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+};
