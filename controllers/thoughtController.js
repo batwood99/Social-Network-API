@@ -23,3 +23,18 @@ module.exports = {
         }
     },
 
+    async createThought(req, res) {
+        try {
+            const newThoughtData = await Thought.create(req.body);
+
+            const userData = await User.findByIdAndUpdate(
+                req.body.userId,
+                { $addToSet: { thoughts: newThoughtData._id } },
+                { runValidators: true, new: true }
+            );
+            res.json({ newThoughtData, userData });
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
