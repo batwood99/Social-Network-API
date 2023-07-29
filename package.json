@@ -1,0 +1,24 @@
+{
+    "name": "Social-Network-API",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/batwood99/Social-Network-API.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/batwood99/Social-Network-API/issues"
+    },
+    "homepage": "https://github.com/batwood99/Social-Network-API#readme",
+    "dependencies": {
+      "date-fns": "^2.29.3",
+      "express": "^4.18.2",
+      "mongoose": "^7.3.1"
+    }
+  }
