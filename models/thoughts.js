@@ -29,3 +29,42 @@ const ReactionSchema = new Schema(
   }
 );
 
+const ThoughtSchema = new Schema(
+    {
+        thoughtText: { 
+            type: String, 
+            required: true, 
+            minLength: 1,
+            maxLength: 280
+        },
+        createdAt: { 
+            type: Date, 
+            default: Date.now,
+            get: timeFormat => timeFormat.toLocaleString(),
+        },
+        username: { 
+            type: String, 
+            required: true, 
+        },
+        reactions: [ReactionSchema],
+        lastAccessed: { 
+            type: Date, 
+            default: Date.now 
+        },
+    },
+    {
+        toJSON: {
+            virtuals: true,
+            getters: true,
+        },
+        id: false,
+    },
+);
+
+ThoughtSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length;
+});
+
+const Thoughts = model('Thoughts', ThoughtSchema);
+  
+module.exports = Thoughts;
