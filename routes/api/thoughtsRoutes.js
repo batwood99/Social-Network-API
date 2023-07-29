@@ -1,6 +1,5 @@
 const router = require('express').Router();
 
-// Bringing all methods over
 const {
     getAllThoughts,
     getThoughtById,
@@ -23,10 +22,10 @@ router
 
 // Route for adding a thought
 router
-    .route('/:userId')
+    .route('/:userId/add')
     .post(addThought);
 
-// Routes for deleting and updating
+// Routes for updating and deleting a thought
 router
     .route('/:userId/:thoughtId')
     .put(updateThought)
